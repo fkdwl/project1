@@ -53,9 +53,11 @@ public class DiaryMain extends JFrame {
 		add(p_center);
 
 		TextArea ta1 = new TextArea("Todo list");
-		ta1.setSize(40, 50);
 		add(ta1, BorderLayout.SOUTH);
-
+		
+		
+		
+		
 		// 이전 버튼을 눌렀을 때 전 월로 이동해야함
 		bt_prev.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
