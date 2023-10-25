@@ -4,10 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,9 +37,9 @@ public class DiaryMain extends JFrame{
 	public DiaryMain() {
 		//디자인
 		p_north = new JPanel();
-		bt_prev = new JButton("이전");
+		bt_prev = new JButton("<");
 		lb_title = new JLabel("년도 올 예정", SwingConstants.CENTER);
-		bt_next = new JButton("다음");
+		bt_next = new JButton(">");
 		p_center = new JPanel();
 		
 		//라벨에 폰트 설정
@@ -51,6 +51,10 @@ public class DiaryMain extends JFrame{
 		p_north.add(bt_next);
 		add(p_north, BorderLayout.NORTH);
 		add(p_center);
+		
+		TextArea ta = new TextArea();
+		p_center.add(ta,BorderLayout.SOUTH);
+		
 		
 		//이전 버튼을 눌렀을 때 전 월로 이동해야함
 		bt_prev.addActionListener(new ActionListener() {
@@ -74,7 +78,8 @@ public class DiaryMain extends JFrame{
 		printDate(); //상자에 날짜 그리기
 		
 		setVisible(true);
-		setBounds(100, 100, 780, 780);
+		setResizable(false);
+		setBounds(100, 100, 900, 1000);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
@@ -94,7 +99,7 @@ public class DiaryMain extends JFrame{
 	//요일 생성
 	public void createDay() {
 		for(int i = 0; i < 7; i++){
-			DateBox dayBox = new DateBox(dayAr[i], Color.gray, 100, 70);
+			DateBox dayBox = new DateBox(dayAr[i], Color.gray, 120, 25);
 			p_center.add(dayBox);
 		}
 	}
@@ -102,7 +107,7 @@ public class DiaryMain extends JFrame{
 	//날짜 생성
 	public void createDate() {
 		for(int i = 0; i < dayAr.length*6; i++) {
-			DateBox dateBox = new DateBox("", Color.LIGHT_GRAY, 100, 100);
+			DateBox dateBox = new DateBox("", Color.LIGHT_GRAY, 120, 70);
 			p_center.add(dateBox);
 			dateBoxAr[i] = dateBox;
 		}
