@@ -1,13 +1,18 @@
 package diary;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,16 +22,22 @@ import javax.swing.SwingConstants;
 
 //import app0602.common.StringManager;
 
+
 public class DiaryMain extends JFrame{
 	
-	String[] dayAr = {"Sun", "Mon", "Tue", "Wen", "Thur", "Fri", "Sat"};
-	DateBox[] dateBoxAr = new DateBox[dayAr.length*6];
+	String[] dayAr = {"Sun", "Mon", "Tue", "Wen", "Thur", "Fri", "Sat"}; //요일 칸 갯수 및 값 지정
+	DateBox[] dateBoxAr = new DateBox[dayAr.length*6]; //날짜 칸 갯수 지정
 	JPanel p_north;
 	JButton bt_prev;
 	JLabel lb_title;
 	JButton bt_next;
 	JPanel p_center; //날짜 박스 처리할 영역
 	Calendar cal; //날짜 객체
+	JButton memo;
+	JButton list;
+	JPanel p_down;
+	JPanel p_down2;
+	JLabel lb_title2;
 	
 	int yy; //기준점이 되는 년도
 	int mm; //기준점이 되는 월
@@ -37,20 +48,27 @@ public class DiaryMain extends JFrame{
 	public DiaryMain() {
 		//디자인
 		p_north = new JPanel();
-		bt_prev = new JButton("이전");
-		lb_title = new JLabel("년도 올 예정", SwingConstants.CENTER);
-		bt_next = new JButton("다음");
+		bt_prev = new JButton("이전");  // 이전 버튼
+		lb_title = new JLabel("년도 올 예정", SwingConstants.CENTER);  // 현재 년도와 월 표기
+		bt_next = new JButton("다음");  // 다음 버튼
 		p_center = new JPanel();
 		
 		//라벨에 폰트 설정
-		lb_title.setFont(new Font("Arial-Black", Font.BOLD, 25));
-		lb_title.setPreferredSize(new Dimension(300, 30));
+		lb_title.setFont(new Font("Arial-Black", Font.BOLD, 25));  // 현재 년도와 월 표기의 색, 글씨체, 크기 설정
+		lb_title.setPreferredSize(new Dimension(100, 30));  // 이전 버튼, 현재 년도 표기, 다음 버튼의 사이 간격 설정
 		
 		p_north.add(bt_prev);
 		p_north.add(lb_title);
 		p_north.add(bt_next);
-		add(p_north, BorderLayout.NORTH);
+		add(p_north, BorderLayout.NORTH);  // 현재 년도와 월 표기 위치 설정 (북쪽으로 위치(위))
 		add(p_center);
+		
+		/*
+		TextArea ta1 = new TextArea("Memo");
+		ta1.setSize(40, 50);
+		ta1.setBounds(30, 0, 40, 50);
+		add(ta1, BorderLayout.SOUTH);
+		*/
 		
 		//이전 버튼을 눌렀을 때 전 월로 이동해야함
 		bt_prev.addActionListener(new ActionListener() {
@@ -66,16 +84,57 @@ public class DiaryMain extends JFrame{
 			}
 		});
 		
+		
+		p_down = new JPanel();
+		list = new JButton("To do List");
+		lb_title2 = new JLabel("", SwingConstants.CENTER);
+		memo = new JButton("Memo");
+		p_center = new JPanel();
+		
+		lb_title2.setPreferredSize(new Dimension(0, 100)); 
+		
+		list.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new List();
+			}
+		});
+		
+		memo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new Memo();
+			}
+		});
+		
+		p_down.add(list);
+		p_down.add(memo);
+		p_down.add(lb_title2);
+		
+		//setBounds(0, 0, 700, 600);
+		add(p_down, BorderLayout.SOUTH);
+		//memo.setLocation(600, 600);
+		add(p_center);
+		
+		
 		getCurrentDate(); //현재 날짜 객체 생성
 		getDateInfo(); //날짜 객체로부터 정보들 구하기
 		setDateTitle(); //타이틀 라벨에 날짜 표시하기
 		createDay(); //요일 박스 생성
 		createDate(); //날짜 박스 생성
 		printDate(); //상자에 날짜 그리기
+		//memo(); 
+		list();
 		
+		// 메인 화면 창
 		setVisible(true);
-		setBounds(100, 100, 780, 780);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
+		setBounds(100, 100, 900, 700); // 화면 창 크기
+		setDefaultCloseOperation(EXIT_ON_CLOSE);  // x(창 닫기) 누르면 창 꺼지는 거
 	}
 	
 	//현재날짜 객체 만들기
@@ -94,7 +153,7 @@ public class DiaryMain extends JFrame{
 	//요일 생성
 	public void createDay() {
 		for(int i = 0; i < 7; i++){
-			DateBox dayBox = new DateBox(dayAr[i], Color.gray, 100, 70);
+			DateBox dayBox = new DateBox(dayAr[i], Color.gray, 120, 25);
 			p_center.add(dayBox);
 		}
 	}
@@ -102,11 +161,82 @@ public class DiaryMain extends JFrame{
 	//날짜 생성
 	public void createDate() {
 		for(int i = 0; i < dayAr.length*6; i++) {
-			DateBox dateBox = new DateBox("", Color.LIGHT_GRAY, 100, 100);
+			DateBox dateBox = new DateBox("", Color.LIGHT_GRAY, 120, 70);
 			p_center.add(dateBox);
 			dateBoxAr[i] = dateBox;
 		}
 	}
+	
+	
+	 /*
+	//리스트 생성
+	public void list() {
+		//setLayout(null);
+		p_down = new JPanel();
+		
+		list = new JButton("To do List");
+		lb_title2 = new JLabel("", SwingConstants.CENTER);
+		memo = new JButton("Memo");
+		//p_down.setBounds(200, 550, 150, 30);
+		p_center = new JPanel();
+		
+		lb_title2.setPreferredSize(new Dimension(200, 100)); 
+		
+		list.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new List();
+			}
+		});
+		
+		memo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new Memo();
+			}
+		});
+		
+		p_down.add(list);
+		p_down.add(memo);
+		p_down.add(lb_title2);
+		
+		//setBounds(0, 0, 700, 600);
+		add(p_down, BorderLayout.SOUTH);
+		//memo.setLocation(600, 600);
+		add(p_center);
+		setVisible(true);
+		
+	}
+	
+	/*
+	//메모장 생성
+	public void memo() {
+		//setLayout(null);
+		p_down2 = new JPanel();
+	
+		memo = new JButton("Memo");
+		//p_down2.setBounds(500, 550, 150, 30);
+		
+		memo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new Memo();
+			}
+		});
+		p_down2.add(memo);
+		
+		//setBounds(0, 0, 700, 600);
+		add(p_down2, BorderLayout.SOUTH);
+		setVisible(true);
+	}
+	*/
+
 	
 	//해당 월의 시작 요일 구하기
 	//개발 원리 : 날짜 객체를 해당 월의 1일로 조작한 후, 요일 구하기
