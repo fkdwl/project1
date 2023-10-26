@@ -128,7 +128,7 @@ public class DiaryMain extends JFrame{
 		createDate(); //날짜 박스 생성
 		printDate(); //상자에 날짜 그리기
 		//memo(); 
-		list();
+		//list();
 		
 		// 메인 화면 창
 		setVisible(true);
