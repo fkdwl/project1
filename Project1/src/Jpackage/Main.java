@@ -5,6 +5,9 @@ import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
+import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Main {
 	public static void main(String[] args) {
@@ -28,7 +31,13 @@ public class Main {
 		f.add(lg);
 		f.add(rgs);
 		f.setVisible(true);
-
+		
+		f.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				f.dispose();
+			}
+		});
 	}
 
 }
