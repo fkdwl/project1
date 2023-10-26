@@ -1,17 +1,13 @@
 package diary;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Label;
-import java.awt.Panel;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -19,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import Jpackage.Main;
 
 //import app0602.common.StringManager;
 
@@ -90,9 +88,10 @@ public class DiaryMain extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				new List();
+							
 			}
+			
 		});
 		
 		memo.addActionListener(new ActionListener() {
@@ -103,6 +102,7 @@ public class DiaryMain extends JFrame{
 				new Memo();
 			}
 		});
+		
 		
 		p_down.add(list);
 		p_down.add(memo);
@@ -160,75 +160,6 @@ public class DiaryMain extends JFrame{
 		}
 	}
 	
-	
-	 /*
-	//리스트 생성
-	public void list() {
-		//setLayout(null);
-		p_down = new JPanel();
-		
-		list = new JButton("To do List");
-		lb_title2 = new JLabel("", SwingConstants.CENTER);
-		memo = new JButton("Memo");
-		//p_down.setBounds(200, 550, 150, 30);
-		p_center = new JPanel();
-		
-		lb_title2.setPreferredSize(new Dimension(200, 100)); 
-		
-		list.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new List();
-			}
-		});
-		
-		memo.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new Memo();
-			}
-		});
-		
-		p_down.add(list);
-		p_down.add(memo);
-		p_down.add(lb_title2);
-		
-		//setBounds(0, 0, 700, 600);
-		add(p_down, BorderLayout.SOUTH);
-		//memo.setLocation(600, 600);
-		add(p_center);
-		setVisible(true);
-		
-	}
-	
-	/*
-	//메모장 생성
-	public void memo() {
-		//setLayout(null);
-		p_down2 = new JPanel();
-	
-		memo = new JButton("Memo");
-		//p_down2.setBounds(500, 550, 150, 30);
-		
-		memo.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new Memo();
-			}
-		});
-		p_down2.add(memo);
-		
-		//setBounds(0, 0, 700, 600);
-		add(p_down2, BorderLayout.SOUTH);
-		setVisible(true);
-	}
-	*/
 
 	
 	//해당 월의 시작 요일 구하기
