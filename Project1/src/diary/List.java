@@ -97,40 +97,7 @@ public class List {
 				f.dispose();
 			}
 		});
-		
-		
-		
-		/*
-		f.setLayout(null);
-		p_north = new JPanel();.
-		
-		lb_title = new JLabel("To Do List", SwingConstants.CENTER);
-		lb_title.setFont(new Font("Arial-Black", Font.BOLD, 25));
-		lb_title.setPreferredSize(new Dimension(100, 30));
-		
-		
-		Label lid = new Label("ID : ", Label.RIGHT);
-	    lid.setBounds(20, 20, 50, 50);
-	    Label lpwd = new Label("PWD : ", Label.RIGHT);
-	    lpwd.setBounds(20, 50, 50, 50);
-		
-	    id = new TextField(10);
-	    id.setBounds(80, 35, 120, 20);
-	    pwd = new TextField(10);
-	    pwd.setBounds(80, 65, 120, 20);
-	    
-	    tfMsg = new TextField();
-	    tfMsg.setBounds(80, 95, 120, 20);
-		
-	    
-		f.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				f.dispose();
-			}
-		});
-		
-		*/
+	
 		f.setVisible(true);
 		f.setResizable(false);  // 화면 크기 고정
 
