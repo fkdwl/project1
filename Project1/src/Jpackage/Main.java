@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 public class Main {
 	public static void main(String[] args) {
 		Frame f = new Frame("login");
-		f.setSize(500, 80);
+		f.setSize(400, 100);
 		f.setLayout(new FlowLayout());
 		
 		Label lid = new Label("ID : " , Label.RIGHT);
@@ -19,8 +19,8 @@ public class Main {
 		Button lg = new Button("Login");
 		Button rgs = new Button("register");
 		
-		TextField id = new TextField(5);
-		TextField pwd = new TextField(5);
+		TextField id = new TextField(7);
+		TextField pwd = new TextField(7);
 		pwd.setEchoChar('*');
 		
 		f.add(lid);

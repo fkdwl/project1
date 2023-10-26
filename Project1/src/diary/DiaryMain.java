@@ -1,13 +1,17 @@
 package diary;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -15,8 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import Jpackage.Main;
 
 //import app0602.common.StringManager;
 
@@ -92,13 +94,8 @@ public class DiaryMain extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new List();
-<<<<<<< HEAD
 		
-=======
-							
->>>>>>> branch 'master' of https://github.com/fkdwl/project1.git
 			}
-			
 		});
 		
 		// 메모장
@@ -108,7 +105,6 @@ public class DiaryMain extends JFrame{
 				new Memo();
 			}
 		});
-		
 		
 		p_down.add(list);
 		p_down.add(memo);
@@ -162,10 +158,6 @@ public class DiaryMain extends JFrame{
 		}
 	}
 	
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/fkdwl/project1.git
 	
 	//해당 월의 시작 요일 구하기
 	//개발 원리 : 날짜 객체를 해당 월의 1일로 조작한 후, 요일 구하기
