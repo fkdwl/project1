@@ -1,10 +1,11 @@
 package diary;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.TextArea;
+import java.awt.Menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -26,7 +27,9 @@ public class DiaryMain extends JFrame {
 	JLabel lb_title;
 	JButton bt_next;
 	JPanel p_center; // 날짜 박스 처리할 영역
-	Calendar cal; // 날짜 객체
+	Calendar cal;// 날짜 객체
+	JButton memo;
+	JButton list;
 
 	int yy; // 기준점이 되는 년도
 	int mm; // 기준점이 되는 월
@@ -51,11 +54,6 @@ public class DiaryMain extends JFrame {
 		p_north.add(bt_next);
 		add(p_north, BorderLayout.NORTH);
 		add(p_center);
-
-		TextArea ta1 = new TextArea("Todo list");
-		add(ta1, BorderLayout.SOUTH);
-		
-		
 		
 		
 		// 이전 버튼을 눌렀을 때 전 월로 이동해야함
@@ -78,12 +76,16 @@ public class DiaryMain extends JFrame {
 		createDay(); // 요일 박스 생성
 		createDate(); // 날짜 박스 생성
 		printDate(); // 상자에 날짜 그리기
-
+		memo();
+		list();
+		
 		setVisible(true);
 		setResizable(false);
-		setBounds(100, 100, 900, 1000);
+		setBounds(100, 100, 900, 750);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
+
+
 
 	// 현재날짜 객체 만들기
 	public void getCurrentDate() {
@@ -164,9 +166,49 @@ public class DiaryMain extends JFrame {
 		lb_title.setText(yy + "-" + StringManager.getZeroString(mm + 1));
 		lb_title.updateUI();
 	}
+	public void memo() {
+	      setLayout(null);
+	      
+	      Button memo = new Button("Memo");
+	      memo.setBounds(500, 550, 150, 30);
+	      
+	      memo.addActionListener(new ActionListener() {
+
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	            dispose();
+	         }
+	      });
+	      p_north.add(memo);
+	      
+	     
+	      add(memo, BorderLayout.SOUTH);
+	      setVisible(true);
+	   }
+	
+	   public void list() {
+		      
+		      
+		      Button list = new Button("To do List");
+		      list.setBounds(200, 550, 150, 30);
+		      
+		      list.addActionListener(new ActionListener() {
+
+		         @Override
+		         public void actionPerformed(ActionEvent e) {
+		            dispose();
+		            
+		         }
+		      });
+		      p_north.add(list);
+		      
+		     
+		      add(list, BorderLayout.SOUTH);
+		      setVisible(false);
+		      
+		   }
 
 	public static void main(String[] args) {
-
 		new DiaryMain();
 
 	}
