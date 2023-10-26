@@ -1,13 +1,17 @@
 package diary;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -15,8 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import Jpackage.Main;
 
 //import app0602.common.StringManager;
 
@@ -76,41 +78,39 @@ public class DiaryMain extends JFrame{
 		});
 		
 		
+		
+		// 투 두 리스트와 메모장 
 		p_down = new JPanel();
-		list = new JButton("To do List");
+		list = new JButton("To do List");  // 투 두 리스트 버튼
 		lb_title2 = new JLabel("", SwingConstants.CENTER);
-		memo = new JButton("Memo");
+		memo = new JButton("Memo");  // 메모장 
 		p_center = new JPanel();
 		
+		// 버튼 위치
 		lb_title2.setPreferredSize(new Dimension(0, 100)); 
 		
+		// 투 두 리스트 창
 		list.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new List();
-							
+		
 			}
-			
 		});
 		
+		// 메모장
 		memo.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
 				new Memo();
 			}
 		});
-		
 		
 		p_down.add(list);
 		p_down.add(memo);
 		p_down.add(lb_title2);
 		
-		//setBounds(0, 0, 700, 600);
 		add(p_down, BorderLayout.SOUTH);
-		//memo.setLocation(600, 600);
 		add(p_center);
 		
 		
@@ -120,9 +120,7 @@ public class DiaryMain extends JFrame{
 		createDay(); //요일 박스 생성
 		createDate(); //날짜 박스 생성
 		printDate(); //상자에 날짜 그리기
-		//memo(); 
-		//list();
-		
+	
 		// 메인 화면 창
 		setVisible(true);
 		setResizable(false);
@@ -160,7 +158,6 @@ public class DiaryMain extends JFrame{
 		}
 	}
 	
-
 	
 	//해당 월의 시작 요일 구하기
 	//개발 원리 : 날짜 객체를 해당 월의 1일로 조작한 후, 요일 구하기
@@ -216,7 +213,5 @@ public class DiaryMain extends JFrame{
 		
 		new DiaryMain();
 		
-
 	}
-
 }
