@@ -102,7 +102,7 @@ public class List {
 		
 		/*
 		f.setLayout(null);
-		p_north = new JPanel();
+		p_north = new JPanel();.
 		
 		lb_title = new JLabel("To Do List", SwingConstants.CENTER);
 		lb_title.setFont(new Font("Arial-Black", Font.BOLD, 25));
