@@ -63,13 +63,6 @@ public class DiaryMain extends JFrame{
 		add(p_north, BorderLayout.NORTH);  // 현재 년도와 월 표기 위치 설정 (북쪽으로 위치(위))
 		add(p_center);
 		
-		/*
-		TextArea ta1 = new TextArea("Memo");
-		ta1.setSize(40, 50);
-		ta1.setBounds(30, 0, 40, 50);
-		add(ta1, BorderLayout.SOUTH);
-		*/
-		
 		//이전 버튼을 눌렀을 때 전 월로 이동해야함
 		bt_prev.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,7 +90,7 @@ public class DiaryMain extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				
 				new List();
 			}
 		});
@@ -106,7 +99,7 @@ public class DiaryMain extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+			
 				new Memo();
 			}
 		});
