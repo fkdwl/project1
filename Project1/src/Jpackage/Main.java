@@ -92,7 +92,7 @@ public class Main {
 					}
 				});
 
-				f.setVisible(false);
+				f.setVisible(true);
 
 			}
 
