@@ -9,7 +9,7 @@ import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Main {
+public class Login {
 	public static void main(String[] args) {
 		Frame f = new Frame("login");
 		f.setSize(500, 100);
