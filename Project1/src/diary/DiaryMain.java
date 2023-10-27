@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import Jpackage.Register;
+import Jpackage.Simplememo;
 
 //import app0602.common.StringManager;
 
@@ -170,7 +171,8 @@ public class DiaryMain extends JFrame {
 		memo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Memo();
+				Simplememo memow = new Simplememo();
+				memow.setVisible(true);
 			}
 		});
 

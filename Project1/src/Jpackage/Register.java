@@ -76,7 +76,7 @@ public class Register {
 				}else {
 					JOptionPane.showMessageDialog(f, "확인되었습니다.");
 					
-					f.dispose();
+					
 				}
 			}
 
@@ -87,6 +87,7 @@ public class Register {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(f, "회원가입 되었습니다.");
+				f.dispose();
 
 			}
 
