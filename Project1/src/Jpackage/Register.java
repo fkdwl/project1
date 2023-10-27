@@ -75,6 +75,8 @@ public class Register {
 				JOptionPane.showMessageDialog(f, "잘못 입력하셨습니다.");
 				}else {
 					JOptionPane.showMessageDialog(f, "확인되었습니다.");
+					
+					f.dispose();
 				}
 			}
 
