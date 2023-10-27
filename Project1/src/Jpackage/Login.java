@@ -22,7 +22,7 @@ public class Login {
 
 		TextField id = new TextField(5);
 		TextField pwd = new TextField(5);
-		pwd.setEchoChar('*');
+		
 
 		f.add(lid);
 		f.add(id);
