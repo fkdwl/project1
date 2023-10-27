@@ -15,18 +15,18 @@ import javax.swing.JOptionPane;
 public class Register {
 
 	public static void main(String[] args) {
-		Frame f = new Frame("Register");
+		Frame f = new Frame("회원가입");
 		f.setSize(400, 400);
 		f.setLayout(null);
 
-		Label lid = new Label("ID : ");
-		Label lpwd = new Label("Password : ");
-		Label lnm = new Label("Name : ");
-		Label ladr = new Label("Address : ");
-		Label lpn = new Label("P-Number : ");
+		Label lid = new Label("아이디 : ");
+		Label lpwd = new Label("비밀번호 : ");
+		Label lnm = new Label("이름 : ");
+		Label ladr = new Label("주소 : ");
+		Label lpn = new Label("번호 : ");
 		
-		Button rs = new Button("Register");
-		Button ID = new Button("ok");
+		Button rs = new Button("회원 가입");
+		Button ID = new Button("확인");
 		
 		TextField id = new TextField(10);
 		TextField pwd = new TextField(10);
@@ -70,8 +70,12 @@ public class Register {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(f, "확인되었습니다.");
-
+				String eid = id.getText().trim();
+				if(eid.isEmpty()) {
+				JOptionPane.showMessageDialog(f, "잘못 입력하셨습니다.");
+				}else {
+					JOptionPane.showMessageDialog(f, "확인되었습니다.");
+				}
 			}
 
 		});
