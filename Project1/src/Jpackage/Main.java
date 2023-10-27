@@ -16,7 +16,6 @@ import diary.DiaryMain;
 
 public class Main {
 	public static void main(String[] args) {
-		new DiaryMain();
 		Frame f = new Frame("로그인");
 		f.setSize(400, 100);
 		f.setLayout(new FlowLayout());

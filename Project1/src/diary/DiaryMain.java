@@ -90,7 +90,12 @@ public class DiaryMain extends JFrame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(f, "로그인 되었습니다.");
+						String elg = id.getText().trim();
+						if(elg.isEmpty()) {
+						JOptionPane.showMessageDialog(f, "오류. 다시 시도해 주세요.");
+						}else {
+							JOptionPane.showMessageDialog(f, "로그인 되었습니다.");
+						}
 					}
 				});
 
