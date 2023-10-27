@@ -12,16 +12,19 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
+import diary.DiaryMain;
+
 public class Main {
 	public static void main(String[] args) {
-		Frame f = new Frame("login");
+		new DiaryMain();
+		Frame f = new Frame("로그인");
 		f.setSize(400, 100);
 		f.setLayout(new FlowLayout());
 
-		Label lid = new Label("ID : ", Label.RIGHT);
-		Label lpwd = new Label("Password : ", Label.RIGHT);
-		Button lg = new Button("Login");
-		Button rgs = new Button("Register");
+		Label lid = new Label("아이디 : ", Label.RIGHT);
+		Label lpwd = new Label("비밀번호 : ", Label.RIGHT);
+		Button lg = new Button("로그인");
+		Button rgs = new Button("회원가입");
 
 		TextField id = new TextField(7);
 		TextField pwd = new TextField(7);
@@ -62,7 +65,7 @@ public class Main {
 
 		class Register {
 			public Register() {
-
+				
 			}
 
 		}
