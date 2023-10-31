@@ -161,7 +161,7 @@ public class DiaryMain extends JFrame {
 		p_down = new JPanel();
 		list = new JButton("To do List"); // 투 두 리스트 버튼
 		lb_title2 = new JLabel("", SwingConstants.CENTER);
-		memo = new JButton("Memo"); // 메모장
+		memo = new JButton("일기장"); // 메모장
 		p_center = new JPanel();
 
 		// 버튼 위치

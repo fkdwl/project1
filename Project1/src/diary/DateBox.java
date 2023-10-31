@@ -3,9 +3,8 @@ package diary;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import javax.swing.JPanel;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.util.Calendar;
+
 import javax.swing.JPanel;
 
 public class DateBox extends JPanel{
@@ -23,6 +22,10 @@ public class DateBox extends JPanel{
 		setPreferredSize(new Dimension(width, height));		
 	}
 	
+	public void getCurrentDate() {
+		Calendar cal = Calendar.getInstance();
+	}
+	
 	//paint를 재정의하면 컴포넌트에 내가 원하는 것을 그릴 수 있다.
 	//이를 이용해서 배경색과 글씨를 넣기
 	public void paint(Graphics g) {
@@ -34,6 +37,8 @@ public class DateBox extends JPanel{
 		//글씨를 그리는 것인데 첫번 째 매개변수는 글씨의 내용
 		//2번째는 x축  3번째는 y축
 		g.drawString(day, 10, 20);
+		
+	
 	}
 
 }

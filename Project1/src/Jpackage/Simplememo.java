@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -27,10 +29,14 @@ import javax.swing.SwingUtilities;
 public class Simplememo extends JFrame {
     private JTextArea textArea;
     private JFileChooser fileChooser;
+    
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    Date now = new Date();
+    String now_dt = format.format(now);
 
     public Simplememo() {
     	Frame f = new Frame("diary 메모");
-        setTitle("Diary 메모장");
+        setTitle(now_dt + "  Diary 일기장");
         setSize(400, 300);
         
 
