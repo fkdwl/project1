@@ -1,22 +1,41 @@
 package Jpackage;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 public class Simplememo extends JFrame {
     private JTextArea textArea;
     private JFileChooser fileChooser;
 
     public Simplememo() {
+    	Frame f = new Frame("diary 메모");
         setTitle("Diary 메모장");
         setSize(400, 300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
 
         textArea = new JTextArea();
-        textArea.setFont(new Font("Arial", Font.PLAIN, 14));
+        textArea.setFont(new Font("Arial-Black", Font.PLAIN, 14));
         JScrollPane scrollPane = new JScrollPane(textArea);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -45,8 +64,10 @@ public class Simplememo extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textArea.setText("");
+                
             }
         });
+     
 
         openMenuItem.addActionListener(new ActionListener() {
             @Override
@@ -103,6 +124,14 @@ public class Simplememo extends JFrame {
                 System.exit(0);
             }
         });
+        
+        f.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				f.dispose();
+			}
+        });
     }
 
     public static void main(String[] args) {
@@ -110,6 +139,9 @@ public class Simplememo extends JFrame {
             public void run() {
                 Simplememo notepad = new Simplememo();
                 notepad.setVisible(true);
+                
+                
+                
             }
         });
     }

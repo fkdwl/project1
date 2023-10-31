@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -67,36 +68,41 @@ public class DiaryMain extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//프레임(윈도우) 생성
 				Frame f = new Frame("로그인");
 				f.setSize(400, 100);
 				f.setLayout(new FlowLayout());
-
+				
+				// 아이디, 비밀번호, 로그인 , 회원가입 에 대한 라벨과 버튼 생성
 				Label lid = new Label("아이디 : ", Label.RIGHT);
 				Label lpwd = new Label("비밀번호 : ", Label.RIGHT);
 				Button lg = new Button("로그인");
-				Button rgs = new Button("회원가입");
+				Button rgs = new Button("회원가입"); 
 
 				TextField id = new TextField(7);
 				TextField pwd = new TextField(7);
+				//패스워드 입력시 ****로 설정
 				pwd.setEchoChar('*');
-
+				
+				//프레임에 라벨, 버튼, 텍스트필드 등을 추가
 				f.add(lid);
 				f.add(id);
 				f.add(lpwd);
 				f.add(pwd);
 				f.add(lg);
 				f.add(rgs);
-
+				
+				//"로그인" 버튼 에 대한 액션 추가
 				lg.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						String elg = id.getText().trim();
+						String elg = id.getText().trim(); // 아이디 입력 값 가져오기
 						if(elg.isEmpty()) {
-						JOptionPane.showMessageDialog(f, "오류. 다시 시도해 주세요.");
+						JOptionPane.showMessageDialog(f, "오류. 다시 시도해 주세요."); // 오류 메시지 표기
 						}else {
-							JOptionPane.showMessageDialog(f, "로그인 되었습니다.");
-							f.dispose();
+							JOptionPane.showMessageDialog(f, "로그인 되었습니다."); // 확인 메시지 표기
+							f.dispose(); // 창 닫기
 						}
 						
 					}
@@ -105,7 +111,7 @@ public class DiaryMain extends JFrame {
 				rgs.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Register.main(null);
+						Register.main(null);// "Register" 클래스 호출해서 회원가입 창 열기
 						
 						
 					}
@@ -114,12 +120,13 @@ public class DiaryMain extends JFrame {
 				f.addWindowListener(new WindowAdapter() {
 					@Override
 					public void windowClosing(WindowEvent e) {
-						f.dispose();
+						f.dispose(); // 창을 닫을때 로그인 창 닫기
 					}
 				});
-				f.setResizable(false);
-				f.setVisible(true);
-
+				f.setResizable(false); // 프레임 조절 금지
+				f.setVisible(true); // 프레임 화면에 표시
+				
+				// Register 클래스 호출
 				class Register {
 					public Register() {
 					}
@@ -173,8 +180,11 @@ public class DiaryMain extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Simplememo memow = new Simplememo();
 				memow.setVisible(true);
+				 
 			}
 		});
+		
+		
 
 		p_down.add(list);
 		p_down.add(memo);
