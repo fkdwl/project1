@@ -1,6 +1,5 @@
 package diary;
 
-import java.awt.BorderLayout;
 import java.awt.Checkbox;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -13,27 +12,36 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 public class List extends JFrame implements MouseListener, ActionListener, ItemListener {
 
     ArrayList<Checkbox> checkboxes = new ArrayList<Checkbox>();
     ArrayList<TextField> textFields = new ArrayList<TextField>();
     
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    Date now = new Date();
+    String now_dt = format.format(now);
+  
+    
     public List() {
+    
         
         JFrame f = new JFrame("To Do List");
         f.setSize(320, 695);
         f.setLayout(new FlowLayout());
 
-        JLabel b1 = new JLabel("To Do List !  (오늘의 할 일을 적어보세요!)");
+        JLabel b1 = new JLabel(now_dt    );
+        JLabel b2 = new JLabel("    To Do List !  (오늘의 할 일을 적어보세요!)");
         f.add(b1);
+        f.add(b2);
 
         JPanel z = new JPanel();
         z.setBounds(100, 100, 320, 00);
