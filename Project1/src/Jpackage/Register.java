@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 import javax.swing.JOptionPane;
 
 public class Register {
@@ -98,11 +102,49 @@ public class Register {
         rs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(f, "회원가입 되었습니다.");
-                f.dispose(); // 프레임 닫기
-            }
-        });
+            	String eid = id .getText().trim();
+            	String epwd = pwd .getText().trim();
+            	String enm = nm .getText().trim();
+            	String eadr = adr .getText().trim();
+            	String epn = pn .getText().trim();
+            	if(eid.isEmpty()||epwd.isEmpty()||enm.isEmpty()||eadr.isEmpty()||epn.isEmpty()) {
+            		JOptionPane.showMessageDialog(f, "다시 작성해 주세요.");
+            	}else {
+            		 try {
+            		 String driver = "oracle.jdbc.driver.OracleDriver";
+            	        String url = "jdbc:oracle:thin:@localhost:1521/xe";
+            	        String user = "c##green";
+            	        String password = "green1234";
+            	        
+            	        Class.forName(driver);
+                        Connection conn = DriverManager.getConnection(url, user, password);
 
+                        String insertQuery = "INSERT INTO Register(dept_id,dept_password,dept_name,dept_address,dept_number) "
+                        		+ "VALUES(?, ?, ?, ?, ?)";
+                        PreparedStatement pstm = conn.prepareStatement(insertQuery);
+
+                        pstm.setString(1, eid);
+                        pstm.setString(2, epwd);
+                        pstm.setString(3, enm);
+                        pstm.setString(4, eadr);
+                        pstm.setString(5, epn);
+
+                        pstm.executeUpdate();
+
+                        pstm.close();
+                        conn.close();
+                        
+                        JOptionPane.showMessageDialog(f, "회원가입 되었습니다.");
+                        f.dispose(); // 프레임 닫기
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                        JOptionPane.showMessageDialog(f, "회원가입 중 오류가 발생했습니다.");
+            	}
+            	 
+            	}    }
+        });
+        
+       
         // 프레임의 닫기 버튼(X)을 누를 때 프레임을 닫음
         f.addWindowListener(new WindowAdapter() {
             @Override

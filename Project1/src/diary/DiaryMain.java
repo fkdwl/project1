@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import JDB.DiaryDB2;
 import Jpackage.Register;
 import Jpackage.Simplememo;
 
@@ -57,7 +58,7 @@ public class DiaryMain extends JFrame {
 		lb_title = new JLabel("년도 올 예정", SwingConstants.CENTER); // 현재 년도와 월 표기
 		bt_next = new JButton("다음"); // 다음 버튼
 		p_center = new JPanel();
-		JButton set_up = new JButton("설정");
+		JButton set_up = new JButton("로그인");
 
 		// 라벨에 폰트 설정
 		lb_title.setFont(new Font("Arial-Black", Font.BOLD, 25)); // 현재 년도와 월 표기의 색, 글씨체, 크기 설정
@@ -115,7 +116,7 @@ public class DiaryMain extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						Register.main(null);// "Register" 클래스 호출해서 회원가입 창 열기
-
+						
 					}
 				});
 
@@ -161,7 +162,7 @@ public class DiaryMain extends JFrame {
 		p_down = new JPanel();
 		list = new JButton("To do List"); // 투 두 리스트 버튼
 		lb_title2 = new JLabel("", SwingConstants.CENTER);
-		memo = new JButton("일기장"); // 메모장
+		memo = new JButton("Memo"); // 메모장
 		p_center = new JPanel();
 
 		// 버튼 위치
@@ -289,11 +290,7 @@ public class DiaryMain extends JFrame {
 
 	public static void main(String[] args) {
 		new DiaryMain();
-		class Main {
-			public Main() {
-			}
-		}
-		new Main();
+		
 
 	}
 }
