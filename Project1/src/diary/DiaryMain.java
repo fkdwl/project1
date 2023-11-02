@@ -59,14 +59,14 @@ public class DiaryMain extends JFrame {
 		lb_title = new JLabel("년도 올 예정", SwingConstants.CENTER); // 현재 년도와 월 표기
 		bt_next = new JButton("다음"); // 다음 버튼
 		p_center = new JPanel();
-		JButton set_up = new JButton("로그인");
+		JButton login = new JButton("로그인");
 
 		// 라벨에 폰트 설정
 		lb_title.setFont(new Font("Arial-Black", Font.BOLD, 25)); // 현재 년도와 월 표기의 색, 글씨체, 크기 설정
 		lb_title.setPreferredSize(new Dimension(100, 30)); // 이전 버튼, 현재 년도 표기, 다음 버튼의 사이 간격 설정
 
-		p_north.add(set_up);
-		set_up.addActionListener(new ActionListener() {
+		p_north.add(login);
+		login.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -106,21 +106,20 @@ public class DiaryMain extends JFrame {
 						} else {
 							LoginDB loginDB = new LoginDB();
 							int loginResult = loginDB.User(elg, epwd);
-							
-							if(loginResult == 1) {
+
+							if (loginResult == 1) {
 								JOptionPane.showMessageDialog(f, "로그인 되었습니다.");
 								f.dispose();
-							}else if(loginResult == 0) {
+							} else if (loginResult == 0) {
 								JOptionPane.showMessageDialog(f, "아이디 또는 비밀번호가 일치 하지 않습니다.");
-							}else if(loginResult == -1) {
+							} else if (loginResult == -1) {
 								JOptionPane.showMessageDialog(f, "사용자가 존재하지 않습니다.");
-							}else {
+							} else {
 								JOptionPane.showMessageDialog(f, "로그인 중 오류가 발생했습니다.");
 							}
-							
+
 						}
 
-						
 					}
 				});
 
