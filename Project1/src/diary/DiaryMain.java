@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import JDB.DiaryDB2;
+import JDB.LoginDB;
 import Jpackage.Register;
 import Jpackage.Simplememo;
 
@@ -100,15 +101,26 @@ public class DiaryMain extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						String elg = id.getText().trim();// 아이디 입력 값 가져오기
 						String epwd = pwd.getText().trim();// 비밀번호 입력 값 가져오기
-						if (elg.isEmpty()) {
-							JOptionPane.showMessageDialog(f, "오류. 다시 시도해 주세요."); // 오류 메시지 표기
-						} else if (epwd.isEmpty()) {
-							JOptionPane.showMessageDialog(f, "오류. 다시 시도해 주세요.");
+						if (elg.isEmpty() || epwd.isEmpty()) {
+							JOptionPane.showMessageDialog(f, "아이디 또는 비밀번호를 입력해주세요");
 						} else {
-							JOptionPane.showMessageDialog(f, "로그인 되었습니다."); // 확인 메시지 표기
-							f.dispose(); // 창 닫기
+							LoginDB loginDB = new LoginDB();
+							int loginResult = loginDB.User(elg, epwd);
+							
+							if(loginResult == 1) {
+								JOptionPane.showMessageDialog(f, "로그인 되었습니다.");
+								f.dispose();
+							}else if(loginResult == 0) {
+								JOptionPane.showMessageDialog(f, "아이디 또는 비밀번호가 일치 하지 않습니다.");
+							}else if(loginResult == -1) {
+								JOptionPane.showMessageDialog(f, "사용자가 존재하지 않습니다.");
+							}else {
+								JOptionPane.showMessageDialog(f, "로그인 중 오류가 발생했습니다.");
+							}
+							
 						}
 
+						
 					}
 				});
 
@@ -116,7 +128,7 @@ public class DiaryMain extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						Register.main(null);// "Register" 클래스 호출해서 회원가입 창 열기
-						
+
 					}
 				});
 
@@ -290,7 +302,6 @@ public class DiaryMain extends JFrame {
 
 	public static void main(String[] args) {
 		new DiaryMain();
-		
 
 	}
 }

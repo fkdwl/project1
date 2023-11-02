@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
+import JDB.LoginDB;
 import diary.DiaryMain;
 
 public class Main {
@@ -68,6 +69,11 @@ public class Main {
 			}
 
 		}
+		 class LoginDB{
+			 public LoginDB() {
+				 
+			 }
+		 }
 	}
 
 }
