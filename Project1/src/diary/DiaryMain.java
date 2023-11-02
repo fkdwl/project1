@@ -60,7 +60,8 @@ public class DiaryMain extends JFrame {
 		bt_next = new JButton("다음"); // 다음 버튼
 		p_center = new JPanel();
 		JButton login = new JButton("로그인");
-
+		JButton set_up = new JButton("설정");
+		
 		// 라벨에 폰트 설정
 		lb_title.setFont(new Font("Arial-Black", Font.BOLD, 25)); // 현재 년도와 월 표기의 색, 글씨체, 크기 설정
 		lb_title.setPreferredSize(new Dimension(100, 30)); // 이전 버튼, 현재 년도 표기, 다음 버튼의 사이 간격 설정
@@ -79,12 +80,13 @@ public class DiaryMain extends JFrame {
 				Label lid = new Label("아이디 : ", Label.RIGHT);
 				Label lpwd = new Label("비밀번호 : ", Label.RIGHT);
 				Button lg = new Button("로그인");
-				Button rgs = new Button("회원가입");
-
+				Button rgs = new Button("회원가입");	
 				TextField id = new TextField(7);
 				TextField pwd = new TextField(7);
 				// 패스워드 입력시 ****로 설정
 				pwd.setEchoChar('*');
+				
+				set_up.setBounds(400,10,80,30);
 
 				// 프레임에 라벨, 버튼, 텍스트필드 등을 추가
 				f.add(lid);
@@ -93,7 +95,10 @@ public class DiaryMain extends JFrame {
 				f.add(pwd);
 				f.add(lg);
 				f.add(rgs);
-
+				f.add(set_up);
+				
+				
+				
 				// "로그인" 버튼 에 대한 액션 추가
 				lg.addActionListener(new ActionListener() {
 
@@ -104,7 +109,7 @@ public class DiaryMain extends JFrame {
 						if (elg.isEmpty() || epwd.isEmpty()) {
 							JOptionPane.showMessageDialog(f, "아이디 또는 비밀번호를 입력해주세요");
 						} else {
-							LoginDB loginDB = new LoginDB();
+							LoginDB loginDB = new LoginDB(); 
 							int loginResult = loginDB.User(elg, epwd);
 
 							if (loginResult == 1) {
@@ -148,13 +153,16 @@ public class DiaryMain extends JFrame {
 			}
 
 		});
-
 		p_north.add(bt_prev);
 		p_north.add(lb_title);
 		p_north.add(bt_next);
+		add(set_up);
+		set_up.setLocation(800,5);
+		set_up.setSize(60,30);
 		add(p_north, BorderLayout.NORTH); // 현재 년도와 월 표기 위치 설정 (북쪽으로 위치(위))
 		add(p_center);
-
+		
+		
 		// 이전 버튼을 눌렀을 때 전 월로 이동해야함
 		bt_prev.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
