@@ -22,6 +22,7 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class List extends JFrame implements MouseListener, ActionListener, ItemListener {
@@ -85,6 +86,7 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 						pstm.executeUpdate();
 					
 					conn.close();
+					JOptionPane.showMessageDialog(f, "저장 되었습니다.");
 				} 
 				}catch (Exception e1) {
 					e1.printStackTrace();
