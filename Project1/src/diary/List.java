@@ -60,6 +60,7 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 		bt2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("저장")) {
 				String elt = list.getText().trim();
 				try {
 					String driver = "oracle.jdbc.driver.OracleDriver";
@@ -68,23 +69,28 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 					String password = "green1234";
 					Class.forName(driver);
 					Connection conn = DriverManager.getConnection(url, user, password);
-
-						String insertQuery = "INSERT INTO Todolist(TD_YEAR,TD_MONTH,TD_DAY,TD_HOUR,TD_LIST) "
-								+ "VALUES(?, ?, ?, ?, ?)";
-						PreparedStatement pstm = conn.prepareStatement(insertQuery);
-						pstm.setString(1, " ");
-						pstm.setString(2, " ");
-						pstm.setString(3, " ");
-						pstm.setString(4, " ");
-						pstm.setString(5, elt);
+					
+					for(int i = 0; i<checkboxes.size();i++) {
+						Checkbox checkbox = checkboxes.get(i);
+						TextField textField = textFields.get(i);
+						String task = textField.getText();
+						boolean completed = checkbox.getState();
+					
+					
+						String insertQuery = "INSERT INTO Todolist(TD_LIST) "
+								+ "VALUES(?)";
+						PreparedStatement pstm = conn.prepareStatement(insertQuery);	
+						pstm.setString(1, task);
 
 						pstm.executeUpdate();
 					
 					conn.close();
-				} catch (Exception e1) {
+				} 
+				}catch (Exception e1) {
 					e1.printStackTrace();
 				}
-
+				}
+				
 			}
 
 		});
@@ -93,6 +99,7 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// "추가하기" 버튼이 눌렸을 때 처리할 내용을 여기에 추가
+				if(e.getActionCommand().equals("추가하기")) {
 				Checkbox newCheckbox = new Checkbox(" ");
 				TextField newTextField = new TextField(25);
 				JButton newDeleteButton = new JButton("삭제");
@@ -120,6 +127,7 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 				z.add(newDeleteButton);
 				z.revalidate();
 				z.repaint();
+			}
 			}
 		});
 
