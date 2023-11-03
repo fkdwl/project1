@@ -114,7 +114,6 @@ public class Register {
 						String url = "jdbc:oracle:thin:@localhost:1521/xe";
 						String user = "c##green";
 						String password = "green1234";
-
 						Class.forName(driver);
 						Connection conn = DriverManager.getConnection(url, user, password);
 

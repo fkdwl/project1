@@ -97,6 +97,15 @@ public class DiaryMain extends JFrame {
 				f.add(rgs);
 				f.add(set_up);
 				
+				set_up.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+				});
+				
+				
+				
 				
 				
 				// "로그인" 버튼 에 대한 액션 추가
