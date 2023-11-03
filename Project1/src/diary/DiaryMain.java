@@ -86,7 +86,7 @@ public class DiaryMain extends JFrame {
 				// 패스워드 입력시 ****로 설정
 				pwd.setEchoChar('*');
 				
-				set_up.setBounds(400,10,80,30);
+				
 
 				// 프레임에 라벨, 버튼, 텍스트필드 등을 추가
 				f.add(lid);
@@ -95,18 +95,14 @@ public class DiaryMain extends JFrame {
 				f.add(pwd);
 				f.add(lg);
 				f.add(rgs);
-				f.add(set_up);
+				
 				
 				set_up.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+					Todolist todolist = new Todolist();
 				}
 				});
-				
-				
-				
-				
 				
 				// "로그인" 버튼 에 대한 액션 추가
 				lg.addActionListener(new ActionListener() {
