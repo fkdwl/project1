@@ -105,7 +105,7 @@ public class DiaryMain extends JFrame {
 	        monthChoice.setLocation(75,5);
 	        monthChoice.setSize(40,30);
 		
-		p_north.add(login);
+		p_north.add(login); //로그인 버튼 구현
 		login.addActionListener(new ActionListener() {
 
 			@Override
@@ -135,7 +135,7 @@ public class DiaryMain extends JFrame {
 				f.add(lg);
 				f.add(rgs);
 				
-				
+				//설정 창 구현
 				set_up.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -171,11 +171,11 @@ public class DiaryMain extends JFrame {
 
 					}
 				});
-
-				rgs.addActionListener(new ActionListener() {
+				
+				rgs.addActionListener(new ActionListener() { // 로그인 버튼 누른 후 회원가입창 구현
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Register.main(null);// "Register" 클래스 호출해서 회원가입 창 열기
+						Register.main(null);// "Register" 클래스 호출
 
 					}
 				});
@@ -219,7 +219,7 @@ public class DiaryMain extends JFrame {
 		p_down = new JPanel();
 		list = new JButton("To do List"); // 투 두 리스트 버튼
 		lb_title2 = new JLabel("", SwingConstants.CENTER);
-		memo = new JButton("Memo"); // 메모장
+		memo = new JButton("일기"); // 일기장
 		p_center = new JPanel();
 
 		// 버튼 위치
