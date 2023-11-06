@@ -135,13 +135,7 @@ public class DiaryMain extends JFrame {
 				f.add(lg);
 				f.add(rgs);
 				
-				//설정 창 구현
-				set_up.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Setup.main(null);
-				}
-				});
+			
 				
 				// "로그인" 버튼 에 대한 액션 추가
 				lg.addActionListener(new ActionListener() {
@@ -168,6 +162,34 @@ public class DiaryMain extends JFrame {
 							}
 
 						}
+						
+						// 메모장
+						memo.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								Simplememo memow = new Simplememo();
+								memow.setVisible(true);
+
+							}
+						});
+						
+						// 투 두 리스트 창
+						list.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								new List();
+
+							}
+						});
+						
+						//설정 창 구현
+						set_up.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							Setup.main(null);
+						}
+						});
+						
 
 					}
 				});
@@ -216,33 +238,18 @@ public class DiaryMain extends JFrame {
 		});
 
 		// 투 두 리스트와 메모장
-		p_down = new JPanel();
-		list = new JButton("To do List"); // 투 두 리스트 버튼
-		lb_title2 = new JLabel("", SwingConstants.CENTER);
-		memo = new JButton("일기"); // 일기장
-		p_center = new JPanel();
+				p_down = new JPanel();
+				list = new JButton("To do List"); // 투 두 리스트 버튼
+				lb_title2 = new JLabel("", SwingConstants.CENTER);
+				memo = new JButton("일기장"); // 일기장
+				p_center = new JPanel();
 
 		// 버튼 위치
 		lb_title2.setPreferredSize(new Dimension(0, 100));
 
-		// 투 두 리스트 창
-		list.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new List();
+	
 
-			}
-		});
-
-		// 메모장
-		memo.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Simplememo memow = new Simplememo();
-				memow.setVisible(true);
-
-			}
-		});
+	
 
 		p_down.add(list);
 		p_down.add(memo);
