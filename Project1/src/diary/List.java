@@ -78,8 +78,7 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 						boolean completed = checkbox.getState();
 					
 					
-						String insertQuery = "INSERT INTO Todolist(TD_LIST) "
-								+ "VALUES(?)";
+						String insertQuery = "INSERT INTO Todolist(TD_LIST) "+"VALUES(?)";
 						PreparedStatement pstm = conn.prepareStatement(insertQuery);	
 						pstm.setString(1, task);
 

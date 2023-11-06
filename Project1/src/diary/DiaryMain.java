@@ -2,6 +2,7 @@ package diary;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -11,9 +12,10 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -23,9 +25,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import JDB.DiaryDB2;
 import JDB.LoginDB;
 import Jpackage.Register;
+import Jpackage.Setup;
 import Jpackage.Simplememo;
 
 //import app0602.common.StringManager;
@@ -45,6 +47,9 @@ public class DiaryMain extends JFrame {
 	JPanel p_down;
 	JPanel p_down2;
 	JLabel lb_title2;
+	
+	Choice yearChoice;
+	Choice monthChoice;
 
 	int yy; // 기준점이 되는 년도
 	int mm; // 기준점이 되는 월
@@ -66,6 +71,40 @@ public class DiaryMain extends JFrame {
 		lb_title.setFont(new Font("Arial-Black", Font.BOLD, 25)); // 현재 년도와 월 표기의 색, 글씨체, 크기 설정
 		lb_title.setPreferredSize(new Dimension(100, 30)); // 이전 버튼, 현재 년도 표기, 다음 버튼의 사이 간격 설정
 
+		//년도, 월 선택 리스트
+	      yearChoice = new Choice();
+	        monthChoice = new Choice();
+	        
+	        for (int k = 2000; k < 3000; k++) {
+	            String a = Integer.toString(k);
+	            yearChoice.addItem(a);
+	        }
+	        // 월
+	        for (int k = 1; k <= 12; k++) {
+	            String a = Integer.toString(k);
+	            monthChoice.addItem(a);
+	        }
+	        
+	        yearChoice.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	                updateCalendar(yearChoice.getSelectedItem(), monthChoice.getSelectedItem());
+	            }
+	        });
+
+	        monthChoice.addItemListener(new ItemListener() {
+	            public void itemStateChanged(ItemEvent e) {
+	                updateCalendar(yearChoice.getSelectedItem(), monthChoice.getSelectedItem());
+	            }
+	        });
+	        
+	        add(yearChoice);
+	        yearChoice.setLocation(10,5);
+	        yearChoice.setSize(60,30);
+	        
+	        add(monthChoice);
+	        monthChoice.setLocation(75,5);
+	        monthChoice.setSize(40,30);
+		
 		p_north.add(login);
 		login.addActionListener(new ActionListener() {
 
@@ -100,7 +139,7 @@ public class DiaryMain extends JFrame {
 				set_up.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Todolist todolist = new Todolist();
+					Setup.main(null);
 				}
 				});
 				
@@ -149,12 +188,6 @@ public class DiaryMain extends JFrame {
 				});
 				f.setResizable(false); // 프레임 조절 금지
 				f.setVisible(true); // 프레임 화면에 표시
-
-				// Register 클래스 호출
-				class Register {
-					public Register() {
-					}
-				}
 			}
 
 		});
@@ -232,6 +265,8 @@ public class DiaryMain extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE); // x(창 닫기) 누르면 창 꺼지는 거
 	}
 
+	
+
 	// 현재날짜 객체 만들기
 	public void getCurrentDate() {
 		cal = Calendar.getInstance();
@@ -246,21 +281,32 @@ public class DiaryMain extends JFrame {
 	}
 
 	// 요일 생성
-	public void createDay() {
-		for (int i = 0; i < 7; i++) {
-			DateBox dayBox = new DateBox(dayAr[i], Color.gray, 120, 25);
-			p_center.add(dayBox);
-		}
-	}
+	   public void createDay() {
+	      for (int i = 0; i < 7; i++) {
+	         if(i == 6) {
+	            DayBox2 dayBox2 = new DayBox2(dayAr[i], Color.gray, 120, 25);
+	            p_center.add(dayBox2);
+	         } else if(i == 0) { 
+	            DayBox3 dayBox3 = new DayBox3(dayAr[i], Color.gray, 120, 25);
+	            p_center.add(dayBox3);
+	         } else  { 
+	            DayBox dayBox = new DayBox(dayAr[i], Color.gray, 120, 25);
+	            p_center.add(dayBox);
+	         }
+	      }
+	   }
 
 	// 날짜 생성
-	public void createDate() {
-		for (int i = 0; i < dayAr.length * 6; i++) {
-			DateBox dateBox = new DateBox("", Color.LIGHT_GRAY, 120, 70);
-			p_center.add(dateBox);
-			dateBoxAr[i] = dateBox;
-		}
-	}
+	   public void createDate() {
+	      for (int i = 0; i < dayAr.length * 6; i++) {
+	           DateBox dateBox = new DateBox("", Color.LIGHT_GRAY, 120, 70);
+	           p_center.add(dateBox);
+	           dateBoxAr[i] = dateBox;
+	           dateBox.updateDate(""); // 날짜 업데이트
+	       }
+	   }
+		
+	
 
 	// 해당 월의 시작 요일 구하기
 	// 개발 원리 : 날짜 객체를 해당 월의 1일로 조작한 후, 요일 구하기
@@ -280,22 +326,49 @@ public class DiaryMain extends JFrame {
 	}
 
 	// 날짜 박스에 날짜 출력하기
-	public void printDate() {
-		System.out.println("시작 요일" + startDay);
-		System.out.println("마지막 일" + lastDate);
+	   public void printDate() {
+	       System.out.println("시작 요일" + startDay);
+	       System.out.println("마지막 일" + lastDate);
 
-		int n = 1;
-		for (int i = 0; i < dateBoxAr.length; i++) {
-			if (i >= startDay && n <= lastDate) {
-				dateBoxAr[i].day = Integer.toString(n);
-				dateBoxAr[i].repaint();
-				n++;
-			} else {
-				dateBoxAr[i].day = "";
-				dateBoxAr[i].repaint();
-			}
-		}
-	}
+	       int n = 1;
+	       int dayOfWeek = startDay; // 시작 요일부터 시작
+
+	       Calendar cal = Calendar.getInstance();
+	       int today = cal.get(Calendar.DAY_OF_MONTH); // 현재 날짜
+	       int currentYear = cal.get(Calendar.YEAR);
+	       int currentMonth = cal.get(Calendar.MONTH);
+
+	       for (int i = 0; i < dateBoxAr.length; i++) {
+	           if (i >= startDay && n <= lastDate) {
+	               dateBoxAr[i].updateDate(Integer.toString(n));
+
+	               // 토요일 (요일 번호 6)인 경우 텍스트 색을 파란색으로 설정
+	               if (i % 7 == 6) {
+	                   dateBoxAr[i].setForeground(Color.BLUE);
+	               }
+	               // 일요일 (요일 번호 1)인 경우 텍스트 색을 빨간색으로 설정
+	               else if (i % 7 == 0) {
+	                   dateBoxAr[i].setForeground(Color.RED);
+	               } else {
+	                   dateBoxAr[i].setForeground(Color.BLACK); // 나머지 날짜는 검정색으로 설정
+	               }
+
+	               // 오늘인 경우 텍스트 색을 노란색으로 설정
+	               if (n == today && yy == currentYear && mm == currentMonth) {
+	                   dateBoxAr[i].setBackground(Color.YELLOW);
+	               } else {
+	                   dateBoxAr[i].setBackground(Color.LIGHT_GRAY);
+	               }
+
+	               n++;
+	               dayOfWeek = (dayOfWeek + 1) % 7; // 다음 날짜의 요일 계산
+	           } else {
+	               dateBoxAr[i].updateDate("");
+	               dateBoxAr[i].setForeground(Color.BLACK);
+	               dateBoxAr[i].setBackground(Color.LIGHT_GRAY);
+	           }
+	       }
+	   }
 
 	// 달력을 넘기거나 전으로 이동할 때 날짜 객체에 대한 정보도 변경
 	public void updateMonth(int data) {
@@ -311,6 +384,16 @@ public class DiaryMain extends JFrame {
 		lb_title.setText(yy + "-" + StringManager.getZeroString(mm + 1));
 		lb_title.updateUI();
 	}
+	
+	public void updateCalendar(String selectedYear, String selectedMonth) {
+        int year = Integer.parseInt(selectedYear);
+        int month = Integer.parseInt(selectedMonth) - 1;
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        getDateInfo();
+        printDate();
+        setDateTitle();
+    }
 
 	public static void main(String[] args) {
 		new DiaryMain();
