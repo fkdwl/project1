@@ -2,6 +2,8 @@ package JDB;
 
 import java.awt.Font;
 import java.awt.TextArea;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -60,7 +62,13 @@ public class TDDB {
 		
 		f.setResizable(false);
 		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		f.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				f.dispose();
+			}
+		});
 	}
 	public static void main(String[] args) {
 			new TDDB();	
