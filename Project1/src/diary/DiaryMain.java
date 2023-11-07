@@ -33,7 +33,6 @@ import Jpackage.Simplememo;
 //import app0602.common.StringManager;
 
 public class DiaryMain extends JFrame {
-
 	String[] dayAr = { "Sun", "Mon", "Tue", "Wen", "Thur", "Fri", "Sat" }; // 요일 칸 갯수 및 값 지정
 	DateBox[] dateBoxAr = new DateBox[dayAr.length * 6]; // 날짜 칸 갯수 지정
 	JPanel p_north;
@@ -55,7 +54,8 @@ public class DiaryMain extends JFrame {
 	int mm; // 기준점이 되는 월
 	int startDay; // 월의 시작 요일
 	int lastDate; // 월의 마지막 날
-
+	
+	
 	// 생성자
 	public DiaryMain() {
 		// 디자인
