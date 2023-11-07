@@ -33,6 +33,16 @@ public class Setup {
 		f.add(tl);
 		f.add(ar);
 		f.add(im);
+		
+		ar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Tell.main(null);
+				
+			}
+			
+		});
 
 		tl.addActionListener(new ActionListener() {
 
