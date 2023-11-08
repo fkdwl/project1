@@ -180,7 +180,8 @@ public class DiaryMain extends JFrame {
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								Simplememo memow = new Simplememo();
-								memow.setVisible(true);
+								memow.setVisible(false);
+								updateUI();
 
 							}
 						});
@@ -189,7 +190,9 @@ public class DiaryMain extends JFrame {
 						list.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								new List();
+								List todolist = new List();
+								todolist.setVisible(false);
+								updateUI();
 
 							}
 						});
@@ -199,6 +202,7 @@ public class DiaryMain extends JFrame {
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								Setup.main(null);
+								updateUI();
 							}
 						});
 
@@ -209,7 +213,13 @@ public class DiaryMain extends JFrame {
 						if (isLoggedIn) {
 							login.setVisible(false);
 							logout.setVisible(true);
+							memo.setVisible(true);
+							list.setVisible(true);
+							set_up.setVisible(true);
 						} else {
+							memo.setVisible(false);
+							list.setVisible(false);
+							set_up.setVisible(false);
 							login.setVisible(true);
 							logout.setVisible(false);
 						}
@@ -418,6 +428,6 @@ public class DiaryMain extends JFrame {
 
 	public static void main(String[] args) {
 		new DiaryMain();
-
+		
 	}
 }
