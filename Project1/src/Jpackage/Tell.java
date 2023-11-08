@@ -9,14 +9,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import JDB.TDDB;
 
 public class Tell extends JFrame implements MouseListener, ActionListener, ItemListener {
 
@@ -56,10 +57,25 @@ public class Tell extends JFrame implements MouseListener, ActionListener, ItemL
          public void actionPerformed(ActionEvent e) {
             boolean isChecked = newCheckbox.isSelected();
             if(isChecked) {
+            	setAlarm();
                f.dispose();
             }
                    
          }
+
+		private void setAlarm() {
+			Timer timer = new Timer();
+			TimerTask task = new TimerTask() {
+
+				@Override
+				public void run() {
+					JOptionPane.showMessageDialog(f, "알람!");
+					
+				}
+				
+			};
+		timer.schedule(task, 5000);	
+		}
       });
       
       
