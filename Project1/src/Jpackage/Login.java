@@ -41,5 +41,4 @@ public class Login {
 		
 		f.setVisible(true);
 	}
-
 }

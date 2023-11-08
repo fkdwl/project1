@@ -33,6 +33,12 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	Date now = new Date();
 	String now_dt = format.format(now);
+	
+	private String userID;
+	
+	public void setUserID(String userID) { 
+		this.userID = userID;
+	}
 
 	public List() {
 
@@ -56,45 +62,7 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 		f.add(bt1);
 		f.add(bt2);
 		
-		TextField list = new TextField(10);
-
-		bt2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("저장")) {
-				String elt = list.getText().trim();
-				try {
-					String driver = "oracle.jdbc.driver.OracleDriver";
-					String url = "jdbc:oracle:thin:@localhost:1521/xe";
-					String user = "c##green";
-					String password = "green1234";
-					Class.forName(driver);
-					Connection conn = DriverManager.getConnection(url, user, password);
-					
-					for(int i = 0; i<checkboxes.size();i++) {
-						Checkbox checkbox = checkboxes.get(i);
-						TextField textField = textFields.get(i);
-						String task = textField.getText();
-						boolean completed = checkbox.getState();
-					
-					
-						String insertQuery = "INSERT INTO Todolist(TD_LIST) "+"VALUES(?)";
-						PreparedStatement pstm = conn.prepareStatement(insertQuery);	
-						pstm.setString(1, task);
-
-						pstm.executeUpdate();
-					
-					conn.close();
-					JOptionPane.showMessageDialog(f, "저장 되었습니다.");
-				} 
-				}catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				}
-				
-			}
-
-		});
+		TextField list = new TextField(10);	
 
 		bt1.addActionListener(new ActionListener() {
 			@Override
@@ -130,6 +98,43 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 				z.repaint();
 			}
 			}
+		});
+		
+		bt2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("저장")) {
+				String elt = list.getText().trim();
+				try {
+					String driver = "oracle.jdbc.driver.OracleDriver";
+					String url = "jdbc:oracle:thin:@localhost:1521/xe";
+					String user = "c##green";
+					String password = "green1234";
+					Class.forName(driver);
+					Connection conn = DriverManager.getConnection(url, user, password);
+					
+					for(int i = 0; i<checkboxes.size();i++) {
+						Checkbox checkbox = checkboxes.get(i);
+						TextField textField = textFields.get(i);
+						String task = textField.getText();
+						
+					if(checkbox.getState()) {
+						String insertQuery = "INSERT INTO TODOLIST(TD_LIST) "+"VALUES(?)";
+						PreparedStatement pstm = conn.prepareStatement(insertQuery);	
+						pstm.setString(1, task);
+						pstm.executeUpdate();
+					}
+					}
+					conn.close();
+					JOptionPane.showMessageDialog(f, "저장 되었습니다.");
+				 
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				}
+				
+			}
+
 		});
 
 		f.setResizable(false);
