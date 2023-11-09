@@ -61,11 +61,10 @@ public class Tell extends JFrame implements MouseListener, ActionListener, ItemL
 		f.add(bt1);
 		
 		JTextArea tf = new JTextArea();
-		tf.setFont(new Font("Arial-Black",Font.PLAIN,14));
-		tf.setBounds(10,10,380,250);
+		tf.setFont(new Font("Arial-Black", Font.PLAIN, 14));
+		tf.setBounds(10, 10, 380, 250);
 		f.add(tf);
-		
-		
+
 		try {
 			String driver = "oracle.jdbc.driver.OracleDriver";
 			String url = "jdbc:oracle:thin:@localhost:1521/xe";
@@ -74,7 +73,7 @@ public class Tell extends JFrame implements MouseListener, ActionListener, ItemL
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 
-			String selectQuery = "SELECT TD_DAY,TD_LIST FROM TODOLIST";
+			String selectQuery = "SELECT TD_LIST FROM TODOLIST";
 			pstmt = con.prepareStatement(selectQuery);
 			rs = pstmt.executeQuery();
 
@@ -83,19 +82,16 @@ public class Tell extends JFrame implements MouseListener, ActionListener, ItemL
 
 			while (rs.next()) {
 				String task = rs.getString("TD_LIST");
-				alarmTime = rs.getString("TD_DAY");
 				tasklist.append(task).append("\n");
 			}
 			if (tasklist.length() > 0) {
 				tf.setText(tasklist.toString());
-				
+
 				JOptionPane.showMessageDialog(f, "사용자의 리스트를 불러왔습니다.");
 			} else {
 				JOptionPane.showMessageDialog(f, "사용자의 리스트가 없습니다.");
 			}
 			con.close();
-
-			final String finalAlarmTime = alarmTime;
 
 			bt1.addActionListener(new ActionListener() {
 				@Override
@@ -103,9 +99,7 @@ public class Tell extends JFrame implements MouseListener, ActionListener, ItemL
 					boolean isChecked = newCheckbox.isSelected();
 					if (isChecked) {
 						f.dispose();
-					} 
-						
-					
+					}
 
 				}
 
@@ -118,8 +112,6 @@ public class Tell extends JFrame implements MouseListener, ActionListener, ItemL
 		f.setVisible(true);
 
 	}
-
-
 
 	public static void main(String[] args) {
 		new Tell();

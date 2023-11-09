@@ -180,7 +180,7 @@ public class DiaryMain extends JFrame {
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								Simplememo memow = new Simplememo();
-								memow.setVisible(false);
+								memow.setVisible(true);
 								updateUI();
 
 							}
