@@ -8,6 +8,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +22,6 @@ public class TDDB {
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
-
 	public TDDB() {
 		JFrame f = new JFrame("TODOLIST");
 		f.setSize(400, 300);
@@ -51,6 +53,7 @@ public class TDDB {
 			
 			if (taskList.length() > 0) {
 				tf.setText(taskList.toString());
+				
 				JOptionPane.showMessageDialog(f, "사용자의 리스트를 불러왔습니다.");
 			} else {
 				JOptionPane.showMessageDialog(f, "사용자의 리스트가 없습니다.");
@@ -70,6 +73,8 @@ public class TDDB {
 			}
 		});
 	}
+	
+	
 	public static void main(String[] args) {
 			new TDDB();	
 		

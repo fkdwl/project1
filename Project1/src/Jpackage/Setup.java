@@ -22,33 +22,25 @@ public class Setup {
 		Frame f = new Frame();
 		f.setSize(190, 210);
 		f.setLayout(null);
-		Button tl = new Button("Todo list");
+
 		Button ar = new Button("알람");
 		Button im = new Button("배경선택");
+		Button logout = new Button("로그아웃");
 
-		tl.setBounds(50, 50, 50, 20);
-		ar.setBounds(50, 100, 50, 20);
-		im.setBounds(50, 150, 50, 20);
+		ar.setBounds(50, 50, 50, 20);
+		im.setBounds(50, 100, 50, 20);
 
-		f.add(tl);
+		f.add(logout);
+
 		f.add(ar);
 		f.add(im);
-		
+
 		ar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Tell.main(null);
-				
-			}
-			
-		});
 
-		tl.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			TDDB.main(null);
 			}
 
 		});
