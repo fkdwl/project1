@@ -40,13 +40,14 @@ public class Setup {
 
 		ar.setBounds(50, 50, 50, 20);
 		im.setBounds(50, 100, 50, 20);
-		imagepanel.setBounds(120, 50, 60, 60);
+		
 
 		f.add(logout);
 
 		f.add(ar);
 		f.add(im);
-		f.add(imagepanel);
+		
+		
 		
 		ar.addActionListener(new ActionListener() {
 
@@ -73,10 +74,12 @@ public class Setup {
 					try {
 						BufferedImage image = ImageIO.read(new File(imagePath));
 						
+						Setup.setSelectedImage(image);
+						
 						DiaryMain diaryMain = new DiaryMain();
 						diaryMain.setBackgroundImage(image);
 						
-						diaryMain.setVisible(true);
+						
 						
 					} catch (IOException ex) {
 						ex.printStackTrace();
