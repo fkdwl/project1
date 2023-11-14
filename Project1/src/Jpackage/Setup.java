@@ -3,6 +3,7 @@ package Jpackage;
 import java.awt.Button;
 import java.awt.FileDialog;
 import java.awt.Frame;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -12,29 +13,41 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import JDB.TDDB;
+import diary.DiaryMain;
 
 public class Setup {
-
+	
+	private static BufferedImage selectedImage;
+	
+	public static void setSelectedImage(BufferedImage image) {
+		selectedImage = image;
+	}
+	public static BufferedImage getSelectedImage() {
+		return selectedImage;
+	}
+	
 	public static void main(String[] args) {
 		Frame f = new Frame();
 		f.setSize(190, 210);
 		f.setLayout(null);
 
-		Button ar = new Button("알람");
+		Button ar = new Button("일정");
 		Button im = new Button("배경선택");
 		Button logout = new Button("로그아웃");
+		JPanel imagepanel = new JPanel();
 
 		ar.setBounds(50, 50, 50, 20);
 		im.setBounds(50, 100, 50, 20);
+		imagepanel.setBounds(120, 50, 60, 60);
 
 		f.add(logout);
 
 		f.add(ar);
 		f.add(im);
-
+		f.add(imagepanel);
+		
 		ar.addActionListener(new ActionListener() {
 
 			@Override
@@ -59,9 +72,12 @@ public class Setup {
 					String imagePath = directory + filename;
 					try {
 						BufferedImage image = ImageIO.read(new File(imagePath));
-
-						f.add(im);
-						f.validate();
+						
+						DiaryMain diaryMain = new DiaryMain();
+						diaryMain.setBackgroundImage(image);
+						
+						diaryMain.setVisible(true);
+						
 					} catch (IOException ex) {
 						ex.printStackTrace();
 					}

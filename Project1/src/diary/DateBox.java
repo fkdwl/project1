@@ -28,4 +28,12 @@ public class DateBox extends JButton {
         this.day = day;
         setText(day);
     }
+
+   public JButton getDateButton() {
+      // TODO Auto-generated method stub
+      JButton button = new JButton();  // Create a new JButton
+       button.setPreferredSize(new Dimension(120, 70));  // Set preferred size as needed
+       // You may set other properties for the button if necessary
+       return button;
+   }
 }

@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.TextComponent;
 import java.awt.TextField;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -45,7 +46,9 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
    Choice dayChoice;
    protected TextComponent list;
    int sum = 0;
+   JPanel z;
 
+   
    public void setUserID(String userID) {
       this.userID = userID;
    }
@@ -54,16 +57,24 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 
       Frame f = new Frame("To Do List");
       f.setSize(320, 618);
+      
+      Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+      int x = (screenSize.width - f.getWidth()) / 2;
+      int y = (screenSize.height - f.getHeight()) / 2;
+      f.setLocation(x, y);
+      
       f.setLayout(new FlowLayout());
       // f.setLocationRelativeTo(null);
 
-      JPanel z = new JPanel(); // 년,월,일 선택 리스트
+      z = new JPanel(); // 년,월,일 선택 리스트
       // z.setSize(300, 300);
-      z.setPreferredSize(new Dimension(300, 35)); // 사이즈
+      z.setPreferredSize(new Dimension(300, 20)); // 사이즈
       // z.setBounds(100, 100, 300, 100);
       z.setBackground(Color.white); // 배경색
       f.add(z);
 
+      
+      /*
       // 년도, 월 선택 리스트
       yearChoice = new Choice();
       monthChoice = new Choice();
@@ -115,7 +126,11 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
 
       z.add(dayChoice);
       dayChoice.setSize(60, 30);
-
+      */
+      
+      
+      
+      
       // 라벨 적는 칸
       JPanel z2 = new JPanel();
       z2.setPreferredSize(new Dimension(300, 50)); // 사이즈
@@ -246,6 +261,13 @@ public class List extends JFrame implements MouseListener, ActionListener, ItemL
       });
 
    }
+   
+   public void displaySelectedDate(String selectedDate) {
+        System.out.println("Selected Date from Calendar: " + selectedDate);
+        
+        JLabel b3 = new JLabel("     선택한 날짜  :  " + selectedDate);
+        z.add(b3);
+    }
 
    protected void updateCalendar(String selectedItem, String selectedItem2, String selectedItem3) {
       // TODO Auto-generated method stub

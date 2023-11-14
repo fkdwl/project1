@@ -85,16 +85,15 @@ public class Tell extends JFrame implements MouseListener, ActionListener, ItemL
          Class.forName(driver);
          con = DriverManager.getConnection(url, user, password);
 
-         String selectQuery = "SELECT TD_DAY,TD_LIST FROM TODOLIST";
+         String selectQuery = "SELECT TD_LIST FROM TODOLIST";
          pstmt = con.prepareStatement(selectQuery);
          rs = pstmt.executeQuery();
 
          StringBuilder tasklist = new StringBuilder();
-         String alarmTime = null;
+         
 
          while (rs.next()) {
             String task = rs.getString("TD_LIST");
-            alarmTime = rs.getString("TD_DAY");
             tasklist.append(task).append("\n");
          }
          if (tasklist.length() > 0) {
@@ -106,7 +105,7 @@ public class Tell extends JFrame implements MouseListener, ActionListener, ItemL
          }
          con.close();
 
-         final String finalAlarmTime = alarmTime;
+         
          
          
       } catch (Exception e1) {
